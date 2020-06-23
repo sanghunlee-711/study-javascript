@@ -5,8 +5,23 @@ const form = document.querySelector(".js-form"),
 const USER_LS = "currentUser",
     SHOWING_CN = "showing";
 
+function saveName(text){
+    localStorage.setItem(USER_LS, text);
+}
+
+
+function handleSubmit(event){
+    event.preventDefault();
+    const currentValue = input.value;
+    paintGreeting(currentValue);
+    saveName(currentValue);
+}
+//form은 기본적으로 방울 같이 올라가서 사라져버림 (다른것에 영향을 주며 ) 근데 우리는 이걸 저장하고 싶으니까 일단 default값인 사라짐을 막는것임
+//그러기 위해서 preventDefault를 사용하는 것.
+
 function askForName() {
     form.classList.add(SHOWING_CN);
+    form.addEventListener("submit", handleSubmit);
 }
 
 function paintGreeting(text){
